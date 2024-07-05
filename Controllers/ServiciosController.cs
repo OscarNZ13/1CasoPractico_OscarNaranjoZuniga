@@ -49,6 +49,8 @@ namespace _1CasoPractico_OscarNaranjoZuniga.Controllers
         }
 
         // POST: Servicios/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion,Costo,Duracion,Estado,Ubicacion,Imagen,FechaCreacion,FechaModificacion")] Servicio servicio)
@@ -78,10 +80,9 @@ namespace _1CasoPractico_OscarNaranjoZuniga.Controllers
             return View(servicio);
         }
 
-        // POST: Servicios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion,Costo,Duracion,Estado,Ubicacion,Imagen,FechaCreacion,FechaModificacion")] Servicio servicio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion,Costo,Duracion,Estado,Ubicacion,Imagen")] Servicio servicio)
         {
             if (id != servicio.Id)
             {
@@ -92,6 +93,15 @@ namespace _1CasoPractico_OscarNaranjoZuniga.Controllers
             {
                 try
                 {
+                    var existingServicio = await _context.Servicios.AsNoTracking().FirstOrDefaultAsync(s => s.Id == id);
+                    if (existingServicio == null)
+                    {
+                        return NotFound();
+                    }
+
+                    servicio.FechaCreacion = existingServicio.FechaCreacion; // Mantener la fecha de creación actual
+                    servicio.FechaModificacion = DateTime.Now; // Obtener la nueva fecha
+
                     _context.Update(servicio);
                     await _context.SaveChangesAsync();
                 }
@@ -110,6 +120,7 @@ namespace _1CasoPractico_OscarNaranjoZuniga.Controllers
             }
             return View(servicio);
         }
+
 
         // GET: Servicios/Delete/5
         public async Task<IActionResult> Delete(int? id)
