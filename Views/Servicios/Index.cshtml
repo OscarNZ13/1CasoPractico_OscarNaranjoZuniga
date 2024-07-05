@@ -28,24 +28,9 @@
                 @Html.DisplayNameFor(model => model.Costo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Duracion)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ubicacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Imagen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCreacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaModificacion)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -61,22 +46,7 @@
                 @Html.DisplayFor(modelItem => item.Costo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Duracion)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ubicacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Imagen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCreacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaModificacion)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
